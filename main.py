@@ -7,6 +7,7 @@ import mingus
 
 
 b = Bar()
+
 b.place_notes(["A-4","G-4"], 4)
 
 b.place_notes("C-5", 4)
