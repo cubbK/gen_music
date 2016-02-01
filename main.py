@@ -6,7 +6,7 @@ import mingus
 # 2/4 doua note de patrimi
 
 meter = (4,4)
-class GenerateBar():
+class GeneratedTrack():
 
 	def generate(self,meter):
 		"""meter should be a touple .
@@ -25,10 +25,19 @@ class GenerateBar():
 		track_1.add_bar(b)
 		return track_1
 
+	def choose_structure(self):
+		structures = [
+			['intro','chorus','chorus'],
+			['intro','chorus','chorus','outro']
+		]
+			 
+		
+		print structures[1]
 
 
-trackin = GenerateBar()
-trackin = trackin.generate(meter)
+
+trackin = GeneratedTrack()
+trackin = trackin.choose_structure()
 
 
-write_Track("test.mid",trackin,bpm=120)
+#write_Track("test.mid",trackin,bpm=120)
