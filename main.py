@@ -1,43 +1,43 @@
 
-from mingus.midi.midi_file_out import write_Bar , write_Track
-from mingus.containers import NoteContainer ,Track,Bar
-import mingus
+from mingus.midi.midi_file_out import write_Bar , write_Track ,write_Composition
+from mingus.containers import NoteContainer ,Track,Bar ,Composition,Suite
+from mingus.containers.instrument import MidiInstrument
+import mingus ,random
 
 # 2/4 doua note de patrimi
 
 meter = (4,4)
 class GeneratedTrack():
-
+	notes = ['C','D','E','F','G','A','B']
 	def generate(self,meter):
 		"""meter should be a touple .
 		(4,4)and(3,4) are recommended"""
 
-		b = Bar('E', (4, 4))
-
-		b.place_notes("C-1", 4)
-		b.place_notes("C-2", 4)
-		b.place_notes("C-3", 2)
 		
-
-		track_1 = Track()
-		track_1.add_bar(b)
-		track_1.add_bar(b)
-		track_1.add_bar(b)
-		return track_1
 
 	def choose_structure(self):
 		structures = [
-			['intro','chorus','chorus'],
+			['intro','verse','chorus','chorus','verse',],
 			['intro','chorus','chorus','outro']
 		]
-			 
-		
-		print structures[1]
+		self.structure = structures[0]	
+
+	def verse(self,meter):
+		instrument = MidiInstrument()
+		instrument.instrument_nr = 1
+		verse = Track()
+		bar_1 = Bar(meter)
+		self.random_note()
+
+	def random_note(self):
+		print random.choice(self.notes)	
+	
+
 
 
 
 trackin = GeneratedTrack()
-trackin = trackin.choose_structure()
+trackin = trackin.verse((4,4))
 
 
-#write_Track("test.mid",trackin,bpm=120)
+#write_Suite("test.mid",trackin,bpm=120)
