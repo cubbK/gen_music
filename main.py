@@ -6,38 +6,37 @@ import mingus ,random
 
 # 2/4 doua note de patrimi
 
-meter = (4,4)
+
 class GeneratedTrack():
 	notes = ['C','D','E','F','G','A','B']
-	def generate(self,meter):
-		"""meter should be a touple .
-		(4,4)and(3,4) are recommended"""
 
-		
-
-	def choose_structure(self):
-		structures = [
-			['intro','verse','chorus','chorus','verse',],
-			['intro','chorus','chorus','outro']
-		]
-		self.structure = structures[0]	
-
-	def verse(self,meter):
-		instrument = MidiInstrument()
-		instrument.instrument_nr = 1
-		verse = Track()
-		bar_1 = Bar(meter)
-		self.random_note()
-
-	def random_note(self):
-		print random.choice(self.notes)	
 	
 
+	def generate(self,meter):
+		"""meter should be a touple """
+		random_notes = self.random_2_notes()
+		nr_of_bars = random.randint(3,10)
 
+		for i in range(0,nr_of_bars):
+			
+
+		bar = Bar("C",meter)
+		bar.place_notes("A-2",4)
+		
+		return bar
+		
+
+	
+
+	def random_2_notes(self):
+		note_1 = random.choice(self.notes)	
+		note_2 = random.choice(self.notes)
+		notes = [note_1,note_2]
+		return notes
 
 
 trackin = GeneratedTrack()
-trackin = trackin.verse((4,4))
+trackin = trackin.generate((4,4))
 
 
-#write_Suite("test.mid",trackin,bpm=120)
+write_Bar("test.mid",trackin,bpm=120)
