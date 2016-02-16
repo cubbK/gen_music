@@ -1,23 +1,21 @@
 
-from mingus.midi.midi_file_out import write_Bar , write_Track ,write_Composition
+import mingus.midi.midi_file_out as midi
 from mingus.containers import NoteContainer ,Track,Bar ,Composition,Suite
 from mingus.containers.instrument import MidiInstrument
+
 import mingus ,random
 
 # 2/4 doua note de patrimi
 
-
+notes = ['C','D','E','F','G','A','B']
 class GeneratedTrack():
-	notes = ['C','D','E','F','G','A','B']
-
 	
-
 	def generate(self,meter):
 		"""meter should be a touple """
-		random_notes = self.random_2_notes()
+		
 		nr_of_bars = random.randint(3,10)
 
-		for i in range(0,nr_of_bars):
+		print Diatonic("A")
 			
 
 		bar = Bar("C",meter)
@@ -28,15 +26,24 @@ class GeneratedTrack():
 
 	
 
-	def random_2_notes(self):
-		note_1 = random.choice(self.notes)	
-		note_2 = random.choice(self.notes)
-		notes = [note_1,note_2]
-		return notes
+
+
+
+def Diatonic(note):
+	chord_proggresions = ["major","minor","minor","major","major","minor","minor"]
+	diatonic = []
+	for i in range(0,len(notes)) :
+		if (notes[i] == note) : 
+			notes_arranged = notes[i:] + notes[:i]
+			
+			print mingus.core.notes.to_minor(notes[0])
+
+	
+
 
 
 trackin = GeneratedTrack()
 trackin = trackin.generate((4,4))
 
 
-write_Bar("test.mid",trackin,bpm=120)
+midi.write_Bar("test.mid",trackin,bpm=120)
