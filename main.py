@@ -15,11 +15,12 @@ class GeneratedTrack():
 		
 		nr_of_bars = random.randint(3,10)
 
-		print Diatonic("A")
+		diatonic =  Diatonic("C")
 			
 
-		bar = Bar("C",meter)
-		bar.place_notes("A-2",4)
+		bar = Bar(diatonic[0],meter)
+		for i in diatonic:
+			bar.place_notes(i,8)
 		
 		return bar
 		
@@ -31,13 +32,15 @@ class GeneratedTrack():
 
 def Diatonic(note):
 	chord_proggresions = ["major","minor","minor","major","major","minor","minor"]
-	diatonic = []
+	
 	for i in range(0,len(notes)) :
 		if (notes[i] == note) : 
-			notes_arranged = notes[i:] + notes[:i]
+			diatonic = notes[i:] + notes[:i]
 			
-			print mingus.core.notes.to_minor(notes[0])
-
+	for i in range(0,len(notes)) :
+		if chord_proggresions[i] == "minor" :
+			diatonic[i] += "b"
+	return diatonic
 	
 
 
