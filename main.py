@@ -9,44 +9,65 @@ import mingus ,random
 
 notes = ['C','D','E','F','G','A','B']
 class GeneratedTrack():
-	
-	def generate(self,meter):
+	leads_to = [
+		[0,1,2,3,4,5,6] , 
+		[0,4,6],
+		[0,3,5],
+		[0,1,4,6],
+		[0,5],
+		[0,1,2,3,4],
+		[0]
+	]
+
+	def __init__(self,meter):
+		self.meter = meter
+
+	def generate(self):
 		"""meter should be a touple """
 		
-		nr_of_bars = random.randint(3,10)
+		nr_of_bars = random.randint(3,10)	
 
-		diatonic =  Diatonic("C")
+		diatonic =  self.Diatonic("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
+		print diatonic
+
+		bar = Bar(diatonic[0],self.meter)
+
+		random_proggresion = [diatonic[0]]
+		nr_of_chords = random.randint(5,15)
+
+		for i in range(1,nr_of_chords):
+			
+			
+			
 			
 
-		bar = Bar(diatonic[0],meter)
-		for i in diatonic:
-			bar.place_notes(i,8)
+		
 		
 		return bar
 		
-
+	def Diatonic(self,note):
+		chord_proggresions = ["major","minor","minor","major","major","minor","minor"]
+		
+		for i in range(0,len(notes)) :
+			if (notes[i] == note) : 
+				diatonic = notes[i:] + notes[:i]
+				
+		for i in range(0,len(notes)) :
+			if chord_proggresions[i] == "minor" :
+				diatonic[i] += "b"
+		return diatonic
 	
 
 
 
 
-def Diatonic(note):
-	chord_proggresions = ["major","minor","minor","major","major","minor","minor"]
-	
-	for i in range(0,len(notes)) :
-		if (notes[i] == note) : 
-			diatonic = notes[i:] + notes[:i]
-			
-	for i in range(0,len(notes)) :
-		if chord_proggresions[i] == "minor" :
-			diatonic[i] += "b"
-	return diatonic
+
 	
 
 
 
-trackin = GeneratedTrack()
-trackin = trackin.generate((4,4))
+trackin = GeneratedTrack((8,4))
+trackin = trackin.generate()
 
 
 midi.write_Bar("test.mid",trackin,bpm=120)
