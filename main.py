@@ -36,8 +36,11 @@ class GeneratedTrack():
 		nr_of_chords = random.randint(5,15)
 
 		for i in range(1,nr_of_chords):
+			print "hey"
+			#random_proggresion.append(diatonic[random.choice(leads_to)]) 
 			
-			
+		def get_diatonic_index(note):
+			print "hello"	
 			
 			
 
