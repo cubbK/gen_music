@@ -28,16 +28,24 @@ class GeneratedTrack():
 		nr_of_bars = random.randint(3,10)	
 
 		diatonic =  self.Diatonic("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
-		print diatonic
+		
 
 		bar = Bar(diatonic[0],self.meter)
 
 		random_proggresion = [diatonic[0]]
 		nr_of_chords = random.randint(5,15)
-
+		print diatonic
 		for i in range(1,nr_of_chords):
-			print "hey"
-			#random_proggresion.append(diatonic[random.choice(leads_to)]) 
+			initial_note = random_proggresion[len(random_proggresion)-1]
+			for i in range(0,len(diatonic)):
+				if initial_note == diatonic[i]:
+					print "yeya"
+
+
+			#print self.leads_to[]
+		
+			random_proggresion.append("Bb") 
+		
 			
 		def get_diatonic_index(note):
 			print "hello"	
