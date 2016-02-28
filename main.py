@@ -39,12 +39,13 @@ class GeneratedTrack():
             initial_note = random_proggresion[len(random_proggresion)-1]
             for i in range(0,len(notes)):
                 if initial_note == notes[i]:
-                    print (GeneratedTrack.leads_to[i])
+                    next_note_index = random.choice(GeneratedTrack.leads_to[i])
+                    random_proggresion.append(diatonic[next_note_index])
 
-
-            #print self.leads_to[]
+        print (diatonic)
+        print (random_proggresion)
         
-            random_proggresion.append("Bb") 
+             
         
             
         def get_diatonic_index(note):
