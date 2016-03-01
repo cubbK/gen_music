@@ -26,36 +26,42 @@ class GeneratedTrack():
         """meter should be a touple """
         
         nr_of_bars = random.randint(3,10)	
-
         diatonic =  self.Diatonic("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
         
+        proggresion = self.random_progression(diatonic)
+        print proggresion
+        
+        def gen_simple(self,diatonic,note_length,proggresion):
+            """generation of a simple song ,each note has the same length"""
+            bar = Bar(diatonic[0],(len(proggresion),note_length))
+            
+            for i in proggresion:
+                print bar.current_beat
+                if bar.current_beat < 1 :
+                    bar.place_notes(i,note_length)
 
-        bar = Bar(diatonic[0],self.meter)
+            return bar 
+
+        return gen_simple(self,diatonic,4,proggresion)
+         
+
+    def random_progression(self,diatonic):
+        """return random proggresion of a diatonic"""
+        
 
         random_proggresion = [diatonic[0]]
-        nr_of_chords = random.randint(5,15)
+        nr_of_chords = random.randint(2,10)
         
         for i in range(1,nr_of_chords):
             initial_note = random_proggresion[len(random_proggresion)-1]
             for i in range(0,len(notes)):
-                if initial_note == notes[i]:
+                if initial_note == diatonic[i]:
                     next_note_index = random.choice(GeneratedTrack.leads_to[i])
                     random_proggresion.append(diatonic[next_note_index])
 
-        print (diatonic)
-        print (random_proggresion)
         
-             
-        
-            
-        def get_diatonic_index(note):
-            print ("hello")	
-            
-            
+        return random_proggresion
 
-        
-        
-        return bar
         
     def Diatonic(self,note):
         chord_proggresions = ["major","minor","minor","major","major","minor","minor"]
@@ -78,7 +84,7 @@ class GeneratedTrack():
 
 
 
-trackin = GeneratedTrack((8,4))
+trackin = GeneratedTrack((4,4))
 trackin = trackin.generate()
 
 
