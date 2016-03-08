@@ -37,14 +37,19 @@ class GeneratedTrack():
 
     def gen_simple(self,diatonic,note_length,proggresion):
         """generation of a simple song ,each note has the same length"""
+        track = Track()
         bar = Bar(diatonic[0],(len(proggresion),note_length))
             
         for i in proggresion:
             print bar.current_beat
+            if bar.current_beat >= 1 :
+                track.add_bar(bar)
+                bar = Bar(diatonic[0],(len(proggresion),note_length))
+
             if bar.current_beat < 1 :
                 bar.place_notes(i,note_length)
 
-        return bar 
+        return track 
          
 
     def random_progression(self,diatonic):
@@ -90,4 +95,4 @@ trackin = GeneratedTrack((4,4))
 trackin = trackin.generate()
 
 
-midi.write_Bar("test.mid",trackin,bpm=120)
+midi.write_Track("test.mid",trackin,bpm=120)
