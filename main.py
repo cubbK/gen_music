@@ -8,7 +8,7 @@ import mingus ,random
 # 2/4 doua note de patrimi
 
 notes = ['C','D','E','F','G','A','B']
-class GeneratedTrack():
+class GenerateTrack():
     leads_to = [
         [0,1,2,3,4,5,6] , 
         [0,4,6],
@@ -42,15 +42,21 @@ class GeneratedTrack():
             
         for i in proggresion:
             print bar.current_beat
-            if bar.current_beat >= 1 :
+            if bar.current_beat == 1 :
                 track.add_bar(bar)
                 bar = Bar(diatonic[0],(len(proggresion),note_length))
 
-            if bar.current_beat < 1 :
+            if bar.current_beat <= 1 :
                 bar.place_notes(i,note_length)
-
+                if proggresion.index(i) == len(proggresion) -1 :
+                    track.add_bar(bar)
+        
+        print track 
         return track 
-         
+    
+    #def song_structure(self):
+
+             
 
     def random_progression(self,diatonic):
         """return random proggresion of a diatonic"""
@@ -63,9 +69,9 @@ class GeneratedTrack():
             initial_note = random_proggresion[len(random_proggresion)-1]
             for i in range(0,len(notes)):
                 if initial_note == diatonic[i]:
-                    next_note_index = random.choice(GeneratedTrack.leads_to[i])
+                    next_note_index = random.choice(GenerateTrack.leads_to[i])
                     random_proggresion.append(diatonic[next_note_index])
-        random_proggresion.append(diatonic[0])
+        
         
         return random_proggresion
 
@@ -91,7 +97,7 @@ class GeneratedTrack():
 
 
 
-trackin = GeneratedTrack((4,4))
+trackin = GenerateTrack((4,4))
 trackin = trackin.generate()
 
 
