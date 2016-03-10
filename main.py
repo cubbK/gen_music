@@ -43,8 +43,11 @@ class GenerateTrack():
         for i in proggresion:
             bar.place_notes(i,note_length)
         print bar
+        return bar 
     
-    #def song_structure(self):
+    def simple_song_structure(self):
+        """returns a structure of songs consisting only of 2 different parts : verse and chorus.In fact these need to be just different"""
+
 
              
 
@@ -91,4 +94,4 @@ trackin = GenerateTrack((4,4))
 trackin = trackin.generate()
 
 
-midi.write_Track("test.mid",trackin,bpm=120)
+midi.write_Bar("test.mid",trackin,bpm=120)
