@@ -38,20 +38,22 @@ class GenerateTrack():
     def gen_simple(self,diatonic,note_length,proggresion):
         """generation of a simple song ,each note has the same length"""
         track = Track()
+        
         bar = Bar(diatonic[0],(len(proggresion),note_length))
+        print bar.meter
+
+        for i in range(0,len(proggresion)):
             
-        for i in proggresion:
-            print bar.current_beat
             if bar.current_beat == 1 :
                 track.add_bar(bar)
                 bar = Bar(diatonic[0],(len(proggresion),note_length))
 
             if bar.current_beat <= 1 :
-                bar.place_notes(i,note_length)
-                if proggresion.index(i) == len(proggresion) -1 :
+                bar.place_notes(proggresion[i],note_length)
+                if proggresion[i] == len(proggresion) -1 :
                     track.add_bar(bar)
         
-        print track 
+        print track
         return track 
     
     #def song_structure(self):
