@@ -63,7 +63,8 @@ class GenerateTrack():
                         break
             else :
                 structure.append(structure[i-1]) 
-        print structure
+        print "structure: " + str(structure)
+        return structure
 
     def random_progression(self,diatonic):
         """return random proggresion of a diatonic"""
