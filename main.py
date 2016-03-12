@@ -30,7 +30,7 @@ class GenerateTrack():
         
         proggresion = self.random_progression(diatonic)
         print proggresion
-       
+        self.basic_song_structure()
 
         return self.gen_simple(diatonic,4,proggresion)
 
@@ -45,11 +45,25 @@ class GenerateTrack():
         print bar
         return bar 
     
-    def simple_song_structure(self):
-        """returns a structure of songs consisting only of 2 different parts : verse and chorus.In fact these need to be just different"""
+    def basic_song_structure(self):
+        """returns a random structure  """
+        structure = [] 
+        parts = [] # like chorus ,verse ,introduction
+        for i in range(0, random.randint(2,4)+1): #creates nr_of_parts
+            parts.append(i)
+        structure.append(random.choice(parts))
 
-
-             
+        for i in range(1,random.randint(10,30)):
+            probability = random.randint(1,100)
+            if probability >75 :
+                while True:
+                    ran = random.choice(parts)
+                    if ran != structure[i-1]:
+                        structure.append(ran)
+                        break
+            else :
+                structure.append(structure[i-1]) 
+        print structure
 
     def random_progression(self,diatonic):
         """return random proggresion of a diatonic"""
