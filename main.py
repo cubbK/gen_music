@@ -29,10 +29,21 @@ class GenerateTrack():
         diatonic =  self.Diatonic("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
         
         proggresion = self.random_progression(diatonic)
-        print proggresion
-        self.basic_song_structure()
+        
 
-        return self.gen_simple(diatonic,4,proggresion)
+        arrangement = self.basic_song_structure()
+        
+
+        generated_parts = []
+        for i in range(0,len(arrangement["parts"])+1): #generate nr of parts neccesary
+            generated_parts.append(self.gen_simple(diatonic,4,proggresion) )
+        
+
+        song = Track()
+        for i in generated_parts :
+            song.add_bar(i)
+        print song 
+        return song
 
 
     def gen_simple(self,diatonic,note_length,proggresion):
@@ -42,7 +53,7 @@ class GenerateTrack():
         
         for i in proggresion:
             bar.place_notes(i,note_length)
-        print bar
+        
         return bar 
     
     def basic_song_structure(self):
@@ -63,8 +74,12 @@ class GenerateTrack():
                         break
             else :
                 structure.append(structure[i-1]) 
-        print "structure: " + str(structure)
-        return structure
+        print "structure = " + str(structure)
+        arrangement = {
+            "parts" : parts,
+            "structure":structure
+            }
+        return arrangement
 
     def random_progression(self,diatonic):
         """return random proggresion of a diatonic"""
@@ -109,4 +124,4 @@ trackin = GenerateTrack((4,4))
 trackin = trackin.generate()
 
 
-midi.write_Bar("test.mid",trackin,bpm=120)
+midi.write_Track("test.mid",trackin,bpm=120)
