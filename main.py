@@ -22,33 +22,52 @@ class GenerateTrack():
     def __init__(self,meter):
         self.meter = meter
 
+    def generate_test(self):
+        bar1 = Bar()
+        bar1.place_notes("A-4", 4)
+        bar2 =Bar()
+        bar2.place_notes("B-4", 4)
+        bar3 = Bar()
+        bar3.place_notes("C-4", 4)
+        song = Track()
+        bars = [bar1,bar2,bar3]
+        structure = [0,1,2,0,1,2,2,1,0]
+        for i in structure:
+            song.add_bar(bars[i])
+        print song
+        return song
+
+
+
     def generate(self):
         """meter should be a touple """
         
         nr_of_bars = random.randint(3,10)	
-        diatonic =  self.Diatonic("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
+        diatonic =  self.Diatonic("D")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
         
-        proggresion = self.random_progression(diatonic)
+         
         
-
-        arrangement = self.basic_song_structure()
-        
+        arrangement = self.basic_song_structure() # arragement.structure and arragement.parts are used
 
         generated_parts = []
-        for i in range(0,len(arrangement["parts"])+1): #generate nr of parts neccesary
-            generated_parts.append(self.gen_simple(diatonic,4,proggresion) )
+        for i in range(0,len(arrangement["parts"])):
+            proggresion = self.random_progression(diatonic)
+            generated_bar = self.gen_simple(diatonic,self.meter[1],proggresion)
+            generated_parts.append(generated_bar)
         
-
         song = Track()
-        for i in generated_parts :
-            song.add_bar(i)
-        print song 
-        return song
+        for i in arrangement["structure"]:
+            song.add_bar(generated_parts[i])
+        return song   
+
+       
+        
+        
 
 
     def gen_simple(self,diatonic,note_length,proggresion):
         """generation of a simple song ,each note has the same length"""
-        track = Track()
+        
         bar = Bar(diatonic[0],(len(proggresion),note_length))
         
         for i in proggresion:
@@ -60,7 +79,7 @@ class GenerateTrack():
         """returns a random structure  """
         structure = [] 
         parts = [] # like chorus ,verse ,introduction
-        for i in range(0, random.randint(2,4)+1): #creates nr_of_parts
+        for i in range(0, random.randint(2,5)): #creates nr_of_parts
             parts.append(i)
         structure.append(random.choice(parts))
 
@@ -75,6 +94,7 @@ class GenerateTrack():
             else :
                 structure.append(structure[i-1]) 
         print "structure = " + str(structure)
+        print "Parts" + str(parts)
         arrangement = {
             "parts" : parts,
             "structure":structure
