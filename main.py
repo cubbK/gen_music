@@ -43,7 +43,7 @@ class GenerateTrack():
         """meter should be a touple """
         
         nr_of_bars = random.randint(3,10)	
-        diatonic =  self.Diatonic("D")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
+        diatonic =  self.getMajorScale("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
         
          
         
@@ -119,16 +119,16 @@ class GenerateTrack():
         return random_proggresion
 
         
-    def Diatonic(self,note):
-        chord_proggresions = ["major","minor","minor","major","major","minor","minor"]
+    def getMajorScale(self,note):
+        chord_proggresions = ["whole","whole","half","whole","whole","whole","half"]
         
         for i in range(0,len(notes)) :
             if (notes[i] == note) : 
                 diatonic = notes[i:] + notes[:i]
                 
         for i in range(0,len(notes)) :
-            if chord_proggresions[i] == "minor" :
-                diatonic[i] += "b"
+            if chord_proggresions[i] == "half" :
+                diatonic[i] += "#"
         return diatonic
     
 
@@ -144,4 +144,4 @@ trackin = GenerateTrack((4,4))
 trackin = trackin.generate()
 
 
-midi.write_Track("test.mid",trackin,bpm=120)
+midi.write_Track("drums.mid",trackin,bpm=120)
