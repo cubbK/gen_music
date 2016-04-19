@@ -18,16 +18,10 @@ class GenerateTrack():
         [0,1,2,3,4],
         [0]
     ]
-
-    def __init__(self,meter):
-        self.meter = meter
-
-    
-    
-
+        
 
     def generate(self):
-        """meter should be a touple """
+        
         
         nr_of_bars = random.randint(3,10)	
         diatonic =  self.get_major_scale("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
@@ -41,32 +35,25 @@ class GenerateTrack():
             proggresion = self.random_progression(diatonic)
             print proggresion
             print "rhythm= " + str(self.gen_rhythm(proggresion))
-            generated_bar = self.gen_simple(diatonic,self.meter[1],proggresion)
+            generated_bar = self.gen_simple(diatonic,4,proggresion)
             generated_parts.append(generated_bar)
         
         song = Track()
         for i in arrangement["structure"]:
             song.add_bar(generated_parts[i])
-        self.gen_rhythm(self.meter)
+
+        self.gen_rhythm(proggresion)
         return song   
 
        
         
         
+    
+
     def gen_rhythm(self,proggresion):
         rhythm = []
-        rhythm.append(random.choice([2,4,8])) 
-        probability = random.randint(0,100)
-        for i in range(1,len(proggresion)):
-            random_length = random.choice([2,4,8])
-            if probability <= 70 :
-                rhythm.append(rhythm[i-1])
-            else:
-                rhythm.append(random_length)
-        
-        return rhythm
 
-
+        return
         
     def gen_with_rhythm(self,proggresion,rhythm,diatonic):
 
@@ -147,7 +134,7 @@ class GenerateTrack():
 
 
 
-trackin = GenerateTrack((2,2))
+trackin = GenerateTrack()
 trackin = trackin.generate()
 
 
