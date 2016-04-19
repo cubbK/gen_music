@@ -22,28 +22,15 @@ class GenerateTrack():
     def __init__(self,meter):
         self.meter = meter
 
-    def generate_test(self):
-        bar1 = Bar()
-        bar1.place_notes("A-4", 4)
-        bar2 =Bar()
-        bar2.place_notes("B-4", 4)
-        bar3 = Bar()
-        bar3.place_notes("C-4", 4)
-        song = Track()
-        bars = [bar1,bar2,bar3]
-        structure = [0,1,2,0,1,2,2,1,0]
-        for i in structure:
-            song.add_bar(bars[i])
-        print song
-        return song
-
+    
+    
 
 
     def generate(self):
         """meter should be a touple """
         
         nr_of_bars = random.randint(3,10)	
-        diatonic =  self.getMajorScale("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
+        diatonic =  self.get_major_scale("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
         
          
         
@@ -52,17 +39,38 @@ class GenerateTrack():
         generated_parts = []
         for i in range(0,len(arrangement["parts"])):
             proggresion = self.random_progression(diatonic)
+            print proggresion
+            print "rhythm= " + str(self.gen_rhythm(proggresion))
             generated_bar = self.gen_simple(diatonic,self.meter[1],proggresion)
             generated_parts.append(generated_bar)
         
         song = Track()
         for i in arrangement["structure"]:
             song.add_bar(generated_parts[i])
+        self.gen_rhythm(self.meter)
         return song   
 
        
         
         
+    def gen_rhythm(self,proggresion):
+        rhythm = []
+        rhythm.append(random.choice([2,4,8])) 
+        probability = random.randint(0,100)
+        for i in range(1,len(proggresion)):
+            random_length = random.choice([2,4,8])
+            if probability <= 70 :
+                rhythm.append(rhythm[i-1])
+            else:
+                rhythm.append(random_length)
+        
+        return rhythm
+
+
+        
+    def gen_with_rhythm(self,proggresion,rhythm,diatonic):
+
+        bar = Bar(diatonic[0],)
 
 
     def gen_simple(self,diatonic,note_length,proggresion):
@@ -93,8 +101,7 @@ class GenerateTrack():
                         break
             else :
                 structure.append(structure[i-1]) 
-        print "structure = " + str(structure)
-        print "Parts" + str(parts)
+        
         arrangement = {
             "parts" : parts,
             "structure":structure
@@ -119,7 +126,7 @@ class GenerateTrack():
         return random_proggresion
 
         
-    def getMajorScale(self,note):
+    def get_major_scale(self,note):
         chord_proggresions = ["whole","whole","half","whole","whole","whole","half"]
         
         for i in range(0,len(notes)) :
@@ -140,7 +147,7 @@ class GenerateTrack():
 
 
 
-trackin = GenerateTrack((4,4))
+trackin = GenerateTrack((2,2))
 trackin = trackin.generate()
 
 
