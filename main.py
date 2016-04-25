@@ -33,7 +33,7 @@ class GenerateTrack():
         generated_parts = []
         for i in range(0,len(arrangement["parts"])):
             proggresion = self.random_progression(diatonic)
-            print proggresion
+            print "proggresiion ="+ str(proggresion)
             print "rhythm= " + str(self.gen_rhythm(proggresion))
             generated_bar = self.gen_simple(diatonic,4,proggresion)
             generated_parts.append(generated_bar)
@@ -51,9 +51,31 @@ class GenerateTrack():
     
 
     def gen_rhythm(self,proggresion):
-        rhythm = []
+        rhythm = [] #the final rhythm 
+        beat = []
 
-        return
+        #randmizarea beatului
+        for i in range(random.randint(2,8)):
+            beat.append( random.choice([4,8,16]))
+        
+        while True:
+            if len(rhythm) < len(proggresion):
+                rhythm.extend(beat)
+            else : 
+                break
+        
+        
+        how_much_to_cut = len(rhythm)- len(proggresion)
+        final_length = len(rhythm) - how_much_to_cut
+
+        rhythm = rhythm[:final_length]
+            
+        print "beat : " + str(beat)
+
+
+        return rhythm 
+
+
         
     def gen_with_rhythm(self,proggresion,rhythm,diatonic):
 
