@@ -33,10 +33,17 @@ class GenerateTrack():
         generated_parts = []
         for i in range(0,len(arrangement["parts"])):
             proggresion = self.random_progression(diatonic)
+            rhythm = self.gen_rhythm(proggresion)
+
+            generated_bar_with_rhythm = self.gen_with_rhythm(proggresion,rhythm,diatonic)
+
             print "proggresiion ="+ str(proggresion)
-            print "rhythm= " + str(self.gen_rhythm(proggresion))
+            print "rhythm= " + str(rhythm)
+            
+
+            
             generated_bar = self.gen_simple(diatonic,4,proggresion)
-            generated_parts.append(generated_bar)
+            generated_parts.append(generated_bar_with_rhythm)
         
         song = Track()
         for i in arrangement["structure"]:
@@ -70,7 +77,7 @@ class GenerateTrack():
 
         rhythm = rhythm[:final_length]
             
-        print "beat : " + str(beat)
+        
 
 
         return rhythm 
@@ -78,8 +85,13 @@ class GenerateTrack():
 
         
     def gen_with_rhythm(self,proggresion,rhythm,diatonic):
+        self.get_meter_from_rhythm(rhythm)
+        bar = Bar(key = diatonic[0],meter = self.get_meter_from_rhythm(rhythm))
 
-        bar = Bar(diatonic[0],)
+        for i in range(len(proggresion)):
+            bar.place_notes(proggresion[i],rhythm[i])
+
+        return bar
 
 
     def gen_simple(self,diatonic,note_length,proggresion):
@@ -91,6 +103,8 @@ class GenerateTrack():
             bar.place_notes(i,note_length)
         
         return bar 
+
+    
     
     def basic_song_structure(self):
         """returns a random structure  """
@@ -147,8 +161,22 @@ class GenerateTrack():
                 diatonic[i] += "#"
         return diatonic
     
+    def get_meter_from_rhythm(self,rhythm):
 
-
+        rhythm_16 = []
+        for i in rhythm:
+            if i == 16 :
+                rhythm_16.append(i)
+            elif i == 8 :
+                rhythm_16.extend([16,16]) 
+            elif i == 4 :
+                rhythm_16.extend([16,16,16,16]) 
+            elif i == 2 :
+                rhythm_16.extend([16,16,16,16,16,16,16,16]) 
+        #2/4   2 note de patrimi
+        meter = (len(rhythm_16),16)
+        
+        return meter
 
 
 
