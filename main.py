@@ -24,7 +24,7 @@ class GenerateTrack():
         
         
         nr_of_bars = random.randint(3,10)	
-        diatonic =  self.get_major_scale("C")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
+        diatonic =  self.get_major_scale("A")  # example : ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb']
         
          
         
@@ -32,7 +32,7 @@ class GenerateTrack():
 
         generated_parts = []
         for i in range(0,len(arrangement["parts"])):
-            proggresion = self.random_progression(diatonic)
+            proggresion = self.random_progression(diatonic,"-2")
             rhythm = self.gen_rhythm(proggresion)
 
             generated_bar_with_rhythm = self.gen_with_rhythm(proggresion,rhythm,diatonic)
@@ -131,19 +131,19 @@ class GenerateTrack():
             }
         return arrangement
 
-    def random_progression(self,diatonic):
+    def random_progression(self,diatonic,pitch):
         """return random proggresion of a diatonic"""
         
 
-        random_proggresion = [diatonic[0]]
+        random_proggresion = [diatonic[0] +pitch ]
         nr_of_chords = random.randint(2,10)
         
         for i in range(1,nr_of_chords):
             initial_note = random_proggresion[len(random_proggresion)-1]
             for i in range(0,len(notes)):
-                if initial_note == diatonic[i]:
+                if initial_note == diatonic[i] + pitch:
                     next_note_index = random.choice(GenerateTrack.leads_to[i])
-                    random_proggresion.append(diatonic[next_note_index])
+                    random_proggresion.append(diatonic[next_note_index] + pitch)
         
         
         return random_proggresion
@@ -188,4 +188,4 @@ trackin = GenerateTrack()
 trackin = trackin.generate()
 
 
-midi.write_Track("drums.mid",trackin,bpm=120)
+midi.write_Track("drums1.mid",trackin,bpm=100)

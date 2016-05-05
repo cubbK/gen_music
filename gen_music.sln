@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "gen_music", "gen_music.pyproj", "{5C9197E3-EAE0-425B-863F-E512CF77D5D7}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "test", "..\test\test.pyproj", "{F6A9E931-D348-4574-B05B-119B65A2C594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		test|Any CPU = test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C9197E3-EAE0-425B-863F-E512CF77D5D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9197E3-EAE0-425B-863F-E512CF77D5D7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5C9197E3-EAE0-425B-863F-E512CF77D5D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9197E3-EAE0-425B-863F-E512CF77D5D7}.test|Any CPU.ActiveCfg = test|Any CPU
+		{F6A9E931-D348-4574-B05B-119B65A2C594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6A9E931-D348-4574-B05B-119B65A2C594}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F6A9E931-D348-4574-B05B-119B65A2C594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6A9E931-D348-4574-B05B-119B65A2C594}.test|Any CPU.ActiveCfg = test|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
